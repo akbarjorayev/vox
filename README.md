@@ -6,7 +6,7 @@ Vox is a Claude Code plugin that reads Claude's replies aloud in a natural voice
 
 > **Requires [Node.js](https://nodejs.org)** (any current LTS version). Vox's speech engine runs on Node. Claude Code doesn't include it, so install it first if `node --version` doesn't work in your terminal. If Node.js is missing, `/vox` tells you.
 
-<!-- Demo GIF goes here -->
+[![Vox demo: Claude's reply read aloud, then /vox pause, /vox stop and the settings dialog with its voice list](assets/vox-demo.png)](https://github.com/akbarjorayev/vox/blob/main/assets/vox-demo.mp4)
 
 ## What it does
 
