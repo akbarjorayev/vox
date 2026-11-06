@@ -77,12 +77,30 @@ Run `/vox status`. Vox only speaks up when you need to act. For example, it tell
 
 ## What vox runs and connects to
 
-So you know exactly what happens on your computer:
+So you know exactly what happens on your computer.
 
-- **Network:** the text being read goes to Microsoft's Edge text-to-speech service (`api.msedgeservices.com`) over a secure WebSocket. Before the first sentence of a reply, vox also opens a plain connection to the same server to check whether you're online. Nothing else goes over the internet.
-- **Programs it starts:** Node.js for its own scripts; for playback and the offline voice, what your system has: PowerShell with Windows' built-in speech and media player on Windows, `say` and `afplay` on macOS, and on Linux the first available of `mpv`, `ffplay`, `mpg123`, `cvlc`, `paplay`, `aplay` and `espeak-ng`. `/vox settings page` opens your default browser.
+### Inside Claude Code
+
+Vox is a Claude Code mod: a hooks module, [`hooks/register.tsx`](hooks/register.tsx). It hooks four things:
+
+- **Session start:** registers the `/vox` command.
+- **The `/vox` command:** vox answers its own command, so it costs no tokens. It doesn't run any other slash command.
+- **The settings pane:** draws the `/vox settings` dialog.
+- **A finished reply:** only when auto-speak is on, it reads Claude's finished answer aloud. It ignores subagents and interrupted replies.
+
+What it reads:
+
+- The text you type after `/vox`.
+- Claude's last reply in the current chat, when you run `/vox` on its own.
+- Each finished reply, only when auto-speak is on.
+
+What it runs: one program, `node <plugin folder>/scripts/vox.mjs <command>`. The command is `speak`, `pause`, `resume`, `stop`, `status`, `settings`, `voices` or `help`. The plugin folder is known only once vox is installed, so this command line is put together when it runs. For `speak`, the text to read is passed to that script on standard input. Everything after that happens in the script, as described below. Vox reads no keys, tokens or other credentials.
+
+### Outside Claude Code
+
+- **Network:** the text being read goes to Microsoft's Edge text-to-speech service (`api.msedgeservices.com`) over a secure WebSocket. Before the first sentence of a reply, vox also opens a plain connection to the same server to check whether you're online. Nothing else goes over the internet. See the [privacy policy](PRIVACY.md).
+- **Programs it starts:** for playback and the offline voice, what your system already has: PowerShell with Windows' built-in speech and media player on Windows, `say` and `afplay` on macOS, and on Linux the first available of `mpv`, `ffplay`, `mpg123`, `cvlc`, `paplay`, `aplay` and `espeak-ng`. `/vox settings page` opens your default browser.
 - **Local connections:** while speaking, vox listens on `127.0.0.1` so `/vox pause` and `stop` can reach it, and the settings page is served on `127.0.0.1`. Both use a random token and accept nothing from other computers.
-- **What it reads:** Claude's last reply in the current chat, when you run `/vox` or turn on auto-speak.
 - **Files it writes:** your settings in `~/.vox/config.json`; short-lived audio files, a small status file and `vox.log` in a `vox` folder in your temp directory. Audio files are deleted after they play.
 
 ## Known limits

@@ -60,7 +60,7 @@ class VoxCli {
 
   async settings(): Promise<Settings> {
     const lines = (await this.run(['settings'])).split('\n')
-    const valueOf = (key: string) => lines.find((line) => line.startsWith(`${key}:`))?.slice(key.length + 1).trim()
+    const valueOf = (setting: string) => lines.find((line) => line.startsWith(`${setting}:`))?.slice(setting.length + 1).trim()
     return {
       voice: valueOf('voice') ?? '',
       speed: Number(valueOf('speed') ?? 1),
@@ -154,7 +154,7 @@ class AutoSpeaker {
 class VoiceListState {
   private shown = false
 
-  get isShown(): boolean {
+  isShown(): boolean {
     return this.shown
   }
 
@@ -208,7 +208,7 @@ class RowLayout {
   }
 
   // How far in a list entry's marker sits, so the names line up under the voice row's value.
-  get markerIndent(): string {
+  markerIndent(): string {
     return ' '.repeat(ROW_LABEL_WIDTH - MARKER.length)
   }
 }
@@ -236,7 +236,7 @@ class SettingsDialog {
     const voiceName = current?.name ?? settings.voice
     const speed = `${settings.speed}×`
     const auto = settings.auto ? 'on' : 'off'
-    const isListShown = this.voiceList.isShown
+    const isListShown = this.voiceList.isShown()
 
     // `plain` draws a row as `1: label` with no [ ] frame; the focused row is inverted.
     return (
@@ -256,7 +256,7 @@ class SettingsDialog {
               label={`${voice.name} ${voice.language} ${voice.gender}`}
               onPress={() => void this.change('voice', voice.id, true)}
             >
-              {`${layout.markerIndent}${voice.id === settings.voice ? SELECTED : UNSELECTED}`}
+              {`${layout.markerIndent()}${voice.id === settings.voice ? SELECTED : UNSELECTED}`}
               <Text bold={voice.id === settings.voice}>{layout.name(voice)}</Text>
               <Text dimColor>{layout.detail(voice)}</Text>
             </Button>
@@ -291,9 +291,9 @@ class SettingsDialog {
     return this.change('auto', settings.auto ? 'off' : 'on', false)
   }
 
-  private async change(key: string, value: string, playSample: boolean): Promise<void> {
+  private async change(setting: string, value: string, playSample: boolean): Promise<void> {
     try {
-      await this.cli.run(['settings', key, value])
+      await this.cli.run(['settings', setting, value])
       this.redraw()
       if (playSample) await this.cli.speak(SAMPLE_TEXT)
     } catch {
