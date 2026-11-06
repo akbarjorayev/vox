@@ -24,5 +24,9 @@
     "speech synthesis",
     "voice output",
     "offline"
-  ]
+  ],
+  "icon": "./.claude-plugin/icon.png",
+  "documentationUrl": "https://github.com/akbarjorayev/vox#readme",
+  "supportUrl": "https://github.com/akbarjorayev/vox/issues",
+  "privacyPolicyUrl": "https://github.com/akbarjorayev/vox/blob/main/PRIVACY.md"
 }
