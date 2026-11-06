@@ -1,0 +1,13 @@
+{
+  "name": "vox",
+  "version": "1.0.0",
+  "description": "Read Claude's replies aloud with natural voices. Pause, resume and stop, on Windows, macOS and Linux.",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test"
+  },
+  "dependencies": {
+    "node-edge-tts": "^1.2.12"
+  }
+}

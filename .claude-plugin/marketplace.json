@@ -1,0 +1,15 @@
+{
+  "name": "vox",
+  "owner": {
+    "name": "Akbar Jorayev",
+    "url": "https://akbarjon.uz"
+  },
+  "description": "Vox reads Claude's replies aloud in a natural voice.",
+  "plugins": [
+    {
+      "name": "vox",
+      "source": "./",
+      "description": "Read Claude's replies aloud with natural voices. Pause, resume and stop, on Windows, macOS and Linux."
+    }
+  ]
+}

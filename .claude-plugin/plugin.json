@@ -1,0 +1,28 @@
+{
+  "name": "vox",
+  "displayName": "Vox",
+  "version": "1.0.0",
+  "description": "Read Claude's replies aloud with natural voices. Pause, resume and stop, on Windows, macOS and Linux.",
+  "author": {
+    "name": "Akbar Jorayev",
+    "url": "https://akbarjon.uz"
+  },
+  "homepage": "https://github.com/akbarjorayev/vox",
+  "repository": "https://github.com/akbarjorayev/vox",
+  "license": "MIT",
+  "keywords": [
+    "text-to-speech",
+    "tts",
+    "read aloud",
+    "voice",
+    "speak",
+    "audio",
+    "accessibility",
+    "claude-code",
+    "claude-code-plugin",
+    "claude",
+    "speech synthesis",
+    "voice output",
+    "offline"
+  ]
+}
