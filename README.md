@@ -65,7 +65,7 @@ Yes. Vox notices within a moment that it can't reach the voice server and uses y
 
 ### Where does my text go?
 
-The natural voices are made by Microsoft's online text-to-speech service, so **the text being read is sent to Microsoft**. If you don't want that, turn off your internet connection and vox will use only your computer's own voice, which never leaves your machine.
+The natural voices are made by Microsoft's online text-to-speech service, so **the text being read is sent to Microsoft**. If you don't want that, turn off your internet connection and vox will use only your computer's own voice, which never leaves your machine. The full details are in the [privacy policy](PRIVACY.md).
 
 ### Why did it read one sentence in a different voice?
 
